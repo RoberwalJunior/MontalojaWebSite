@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MontalojaWebSite.Biblioteca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MontalojaWebSite.Bibliotecas.Infraestrutura", "src\Bibliotecas\MontalojaWebSite.Bibliotecas.Infraestrutura\MontalojaWebSite.Bibliotecas.Infraestrutura.csproj", "{39D6E1B3-B7E3-4CCB-B941-902B15B75D00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MontalojaWebSite.API", "src\MontalojaWebSite.API\MontalojaWebSite.API.csproj", "{33EF6E31-6B04-4A79-9834-25B3C6C3DAC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{39D6E1B3-B7E3-4CCB-B941-902B15B75D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D6E1B3-B7E3-4CCB-B941-902B15B75D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D6E1B3-B7E3-4CCB-B941-902B15B75D00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33EF6E31-6B04-4A79-9834-25B3C6C3DAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33EF6E31-6B04-4A79-9834-25B3C6C3DAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33EF6E31-6B04-4A79-9834-25B3C6C3DAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33EF6E31-6B04-4A79-9834-25B3C6C3DAC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

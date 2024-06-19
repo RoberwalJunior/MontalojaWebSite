@@ -1,0 +1,6 @@
+@MontalojaWebSite.API_HostAddress = http://localhost:5021
+
+GET {{MontalojaWebSite.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
