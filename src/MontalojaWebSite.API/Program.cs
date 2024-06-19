@@ -1,4 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<MontalojaWebSiteContext>((options) =>
+{
+    options
+        .UseSqlServer(builder.Configuration.GetConnectionString("MontalojaDb"))
+        .UseLazyLoadingProxies();
+});
 
 // Add services to the container.
 
