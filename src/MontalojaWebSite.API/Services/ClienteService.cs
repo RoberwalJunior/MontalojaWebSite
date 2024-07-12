@@ -5,28 +5,21 @@ using MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
 
 namespace MontalojaWebSite.API.Services;
 
-public class ClienteService
+public class ClienteService(IMapper mapper, DAL<Cliente> dal)
 {
-    private IMapper _mapper;
-    private DAL<Cliente> _dal;
-
-    public ClienteService(IMapper mapper, DAL<Cliente> dal)
-    {
-        _mapper = mapper;
-        _dal = dal;
-    }
+    private readonly IMapper _mapper = mapper;
+    private readonly DAL<Cliente> _dal = dal;
 
     public List<ReadClienteDto> RecuperarClientes()
     {
         var clientes = _dal.Listar();
-        var clientesDtos = _mapper.Map<List<ReadClienteDto>>(clientes);
-        return clientesDtos;
+        return _mapper.Map<List<ReadClienteDto>>(clientes);
     }
 
     public ReadClienteDto? RecuperarClientePorId(int id)
     {
         var cliente = _dal.RecuperarPor(x => x.Id == id);
-        return _mapper.Map<ReadClienteDto>(cliente);
+        return cliente != null ? _mapper.Map<ReadClienteDto>(cliente) : null;
     }
 
     public void CadastrarCliente(CreateClienteDto clienteDto)

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
 
@@ -10,9 +11,11 @@ using MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
 namespace MontalojaWebSite.Bibliotecas.Infraestrutura.Migrations
 {
     [DbContext(typeof(MontalojaWebSiteContext))]
-    partial class MontalojaWebSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20240712205544_AtualizandoLimitesDeCaracteres")]
+    partial class AtualizandoLimitesDeCaracteres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -5,28 +5,21 @@ using MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
 
 namespace MontalojaWebSite.API.Services;
 
-public class MovelService
+public class MovelService(IMapper mapper, DAL<Movel> dal)
 {
-    private IMapper _mapper;
-    private DAL<Movel> _dal;
-
-    public MovelService(IMapper mapper, DAL<Movel> dal)
-    {
-        _mapper = mapper;
-        _dal = dal;
-    }
+    private readonly IMapper _mapper = mapper;
+    private readonly DAL<Movel> _dal = dal;
 
     public List<ReadMovelDto> RecuperarMoveis()
     {
         var moveis = _dal.Listar();
-        var moveisDtos = _mapper.Map<List<ReadMovelDto>>(moveis);
-        return moveisDtos;
+        return _mapper.Map<List<ReadMovelDto>>(moveis);
     }
 
     public ReadMovelDto? RecuperarMovelPorId(int id)
     {
         var movel = _dal.RecuperarPor(x => x.Id == id);
-        return _mapper.Map<ReadMovelDto>(movel);
+        return movel != null ? _mapper.Map<ReadMovelDto>(movel) : null;
     }
 
     public void CadastrarMovel(CreateMovelDto movelDto)

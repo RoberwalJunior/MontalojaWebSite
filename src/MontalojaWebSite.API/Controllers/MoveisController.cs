@@ -4,31 +4,23 @@ using MontalojaWebSite.Bibliotecas.Dominio.Dtos.Movel;
 
 namespace MontalojaWebSite.API.Controllers;
 
-[Route("[controller]")]
+[Route("api/[controller]")]
 [ApiController]
-public class MoveisController : ControllerBase
+public class MoveisController(MovelService movelService) : ControllerBase
 {
-    private MovelService _movelService;
-
-    public MoveisController(MovelService movelService)
-    {
-        _movelService = movelService;
-    }
+    private readonly MovelService _movelService = movelService;
 
     [HttpGet]
     public IActionResult RecuperaMovels()
     {
-        var moveisDtos = _movelService.RecuperarMoveis();
-        return Ok(moveisDtos);
+        return Ok(_movelService.RecuperarMoveis());
     }
 
     [HttpGet("{id}")]
     public IActionResult RecuperaMovelPorId(int id)
     {
         var movel = _movelService.RecuperarMovelPorId(id);
-        if (movel == null) return NotFound();
-
-        return Ok(movel);
+        return movel != null ? Ok(movel) : NotFound();
     }
 
     [HttpPost]
@@ -41,14 +33,12 @@ public class MoveisController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaMovel(int id, [FromBody] UpdateMovelDto movelDto)
     {
-        if (_movelService.AtualizarMovel(id, movelDto)) return NoContent();
-        return NotFound();
+        return _movelService.AtualizarMovel(id, movelDto) ? NoContent() : NotFound();
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletaMovel(int id)
     {
-        if (_movelService.ExcluirMovel(id)) return NoContent();
-        return NotFound();
+        return _movelService.ExcluirMovel(id) ? NoContent() : NotFound();
     }
 }

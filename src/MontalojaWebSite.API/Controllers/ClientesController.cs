@@ -4,31 +4,23 @@ using MontalojaWebSite.Bibliotecas.Dominio.Dtos.Cliente;
 
 namespace MontalojaWebSite.API.Controllers;
 
-[Route("[controller]")]
+[Route("api/[controller]")]
 [ApiController]
-public class ClientesController : ControllerBase
+public class ClientesController(ClienteService service) : ControllerBase
 {
-    private ClienteService _clienteService;
-
-    public ClientesController(ClienteService service)
-    {
-        _clienteService = service;
-    }
+    private readonly ClienteService _clienteService = service;
 
     [HttpGet]
     public IActionResult RecuperaClientes()
     {
-        var clientesDtos = _clienteService.RecuperarClientes();
-        return Ok(clientesDtos);
+        return Ok(_clienteService.RecuperarClientes());
     }
 
     [HttpGet("{id}")]
     public IActionResult RecuperaClientePorId(int id)
     {
         var cliente = _clienteService.RecuperarClientePorId(id);
-        if (cliente == null) return NotFound();
-
-        return Ok(cliente);
+        return cliente != null ? Ok(cliente) : NotFound();
     }
 
     [HttpPost]
@@ -41,14 +33,12 @@ public class ClientesController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaCliente(int id, [FromBody] UpdateClienteDto clienteDto)
     {
-        if (_clienteService.AtualizarCliente(id, clienteDto)) return NoContent();
-        return NotFound();
+        return _clienteService.AtualizarCliente(id, clienteDto) ? NoContent() : NotFound();
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletaCliente(int id)
     {
-        if (_clienteService.ExcluirCliente(id)) return NoContent();
-        return NotFound();
+        return _clienteService.ExcluirCliente(id) ? NoContent() : NotFound();
     }
 }

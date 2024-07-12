@@ -4,9 +4,10 @@ namespace MontalojaWebSite.Bibliotecas.Dominio.Dtos.Loja;
 
 public class CreateLojaDto
 {
-    [Required]
+    [Required(ErrorMessage = "Id do cliente é obrigatório")]
     public int ClienteId { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "Nome da Loja é obrigatório")]
+    [StringLength(50, ErrorMessage = "Não pode conter mais do que 50 caracteres")]
     public string Nome { get; set; } = string.Empty!;
 }

@@ -4,5 +4,5 @@ public class ReadMovelDto
 {
     public int Id { get; set; }
     public int LojaId { get; set; }
-    public string Nome { get; set; } = string.Empty!;
+    public string? Nome { get; set; }
 }

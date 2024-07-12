@@ -5,28 +5,21 @@ using MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
 
 namespace MontalojaWebSite.API.Services;
 
-public class LojaService
+public class LojaService(IMapper mapper, DAL<Loja> dal)
 {
-    private IMapper _mapper;
-    private DAL<Loja> _dal;
-
-    public LojaService(IMapper mapper, DAL<Loja> dal)
-    {
-        _mapper = mapper;
-        _dal = dal;
-    }
+    private readonly IMapper _mapper = mapper;
+    private readonly DAL<Loja> _dal = dal;
 
     public List<ReadLojaDto> RecuperarLojas()
     {
         var lojas = _dal.Listar();
-        var lojasDtos = _mapper.Map<List<ReadLojaDto>>(lojas);
-        return lojasDtos;
+        return _mapper.Map<List<ReadLojaDto>>(lojas);
     }
 
     public ReadLojaDto? RecuperarLojaPorId(int id)
     {
         var loja = _dal.RecuperarPor(x => x.Id == id);
-        return _mapper.Map<ReadLojaDto>(loja);
+        return loja != null ? _mapper.Map<ReadLojaDto>(loja) : null;
     }
 
     public void CadastrarLoja(CreateLojaDto lojaDto)

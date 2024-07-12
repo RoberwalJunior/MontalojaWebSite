@@ -1,9 +1,16 @@
-﻿namespace MontalojaWebSite.Bibliotecas.Dominio.Modelos;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MontalojaWebSite.Bibliotecas.Dominio.Modelos;
 
 public class Movel
 {
     public int Id { get; set; }
-    public string Nome { get; set; } = string.Empty!;
+
+    [Required]
+    [MaxLength(50)]
+    public string? Nome { get; set; }
+
+    [Required]
     public int LojaId { get; set; }
-    public virtual Loja Loja { get; set; } = null!;
+    public virtual Loja? Loja { get; set; }
 }

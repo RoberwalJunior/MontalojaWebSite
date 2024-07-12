@@ -1,17 +1,12 @@
 ﻿namespace MontalojaWebSite.Bibliotecas.Infraestrutura.Dados;
 
-public class DAL<T> : IDisposable where T : class
+public class DAL<T>(MontalojaWebSiteContext context) : IDisposable where T : class
 {
-    private readonly MontalojaWebSiteContext context;
-
-    public DAL(MontalojaWebSiteContext context)
-    {
-        this.context = context;
-    }
+    private readonly MontalojaWebSiteContext context = context;
 
     public IEnumerable<T> Listar()
     {
-        return context.Set<T>().ToList();
+        return [.. context.Set<T>()];
     }
 
     public T? RecuperarPor(Func<T, bool> condicao)

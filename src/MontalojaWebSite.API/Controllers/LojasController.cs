@@ -4,31 +4,23 @@ using MontalojaWebSite.Bibliotecas.Dominio.Dtos.Loja;
 
 namespace MontalojaWebSite.API.Controllers;
 
-[Route("[controller]")]
+[Route("api/[controller]")]
 [ApiController]
-public class LojasController : ControllerBase
+public class LojasController(LojaService lojaService) : ControllerBase
 {
-    private LojaService _lojaService;
-
-    public LojasController(LojaService lojaService)
-    {
-        _lojaService = lojaService;
-    }
+    private readonly LojaService _lojaService = lojaService;
 
     [HttpGet]
     public IActionResult RecuperaLojas()
     {
-        var lojasDtos = _lojaService.RecuperarLojas();
-        return Ok(lojasDtos);
+        return Ok(_lojaService.RecuperarLojas());
     }
 
     [HttpGet("{id}")]
     public IActionResult RecuperaLojaPorId(int id)
     {
         var loja = _lojaService.RecuperarLojaPorId(id);
-        if (loja == null) return NotFound();
-
-        return Ok(loja);
+        return loja != null ? Ok(loja) : NotFound();
     }
 
     [HttpPost]
@@ -41,14 +33,12 @@ public class LojasController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaLoja(int id, [FromBody] UpdateLojaDto lojaDto)
     {
-        if (_lojaService.AtualizarLoja(id, lojaDto)) return NoContent();
-        return NotFound();
+        return _lojaService.AtualizarLoja(id, lojaDto) ? NoContent() : NotFound();
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletaLoja(int id)
     {
-        if (_lojaService.ExcluirLoja(id)) return NoContent();
-        return NotFound();
+        return _lojaService.ExcluirLoja(id) ? NoContent() : NotFound();
     }
 }
