@@ -41,14 +41,14 @@ public class LojasController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaLoja(int id, [FromBody] UpdateLojaDto lojaDto)
     {
-        if (_lojaService.AtualizarLoja(id, lojaDto)) return NotFound();
-        return NoContent();
+        if (_lojaService.AtualizarLoja(id, lojaDto)) return NoContent();
+        return NotFound();
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletaLoja(int id)
     {
-        if (_lojaService.ExcluirLoja(id)) return NotFound();
-        return NoContent();
+        if (_lojaService.ExcluirLoja(id)) return NoContent();
+        return NotFound();
     }
 }

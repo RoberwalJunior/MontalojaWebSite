@@ -41,14 +41,14 @@ public class ClientesController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaCliente(int id, [FromBody] UpdateClienteDto clienteDto)
     {
-        if (_clienteService.AtualizarCliente(id, clienteDto)) return NotFound();
-        return NoContent();
+        if (_clienteService.AtualizarCliente(id, clienteDto)) return NoContent();
+        return NotFound();
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletaCliente(int id)
     {
-        if (_clienteService.ExcluirCliente(id)) return NotFound();
-        return NoContent();
+        if (_clienteService.ExcluirCliente(id)) return NoContent();
+        return NotFound();
     }
 }

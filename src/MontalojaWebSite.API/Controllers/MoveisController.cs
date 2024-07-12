@@ -41,14 +41,14 @@ public class MoveisController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizaMovel(int id, [FromBody] UpdateMovelDto movelDto)
     {
-        if (_movelService.AtualizarMovel(id, movelDto)) return NotFound();
-        return NoContent();
+        if (_movelService.AtualizarMovel(id, movelDto)) return NoContent();
+        return NotFound();
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletaMovel(int id)
     {
-        if (_movelService.ExcluirMovel(id)) return NotFound();
-        return NoContent();
+        if (_movelService.ExcluirMovel(id)) return NoContent();
+        return NotFound();
     }
 }
